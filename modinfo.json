@@ -1,0 +1,13 @@
+{
+    "context": "client",
+    "identifier": "com.pa.domdom.fab_spray_green",
+    "display_name": "Green Fab Spray",
+    "description": "Makes fabricator spray neon green instead of team colored.",
+    "author": "dom314",
+    "forum": "https://forums.uberent.com/threads/rel-client-more-pew-pew.69229/",
+    "icon": "http://i.imgur.com/PQOpc3u.gif",
+    "version": "1.0.0",
+    "priority": 100,
+    "build": "83796",
+    "date": "2015/07/28"
+}

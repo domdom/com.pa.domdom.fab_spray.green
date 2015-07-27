@@ -1,0 +1,71 @@
+{
+    "options" : {
+        "debug_mode" : false,
+        "output_dir" : "..",
+        "pretty_print_effects" : true,
+        "indent" : 2
+    },
+    "modinfo" : {
+        "context" : "client",
+        "identifier" : "com.pa.domdom.fab_spray_green",
+        "display_name" : "Green Fab Spray",
+        "description" : "Makes fabricator spray neon green instead of team colored.",
+        "author" : "dom314",
+        "forum" : "https://forums.uberent.com/threads/rel-client-more-pew-pew.69229/",
+        "icon" : "http://i.imgur.com/PQOpc3u.gif",
+        "version" : "1.0.0",
+        "priority": 100
+    },
+    "mod" : [
+        {
+            "target" : "/pa/effects/specs/fab_spray.pfx",
+            "patch" : [
+                { "op" : "remove", "path" : "/emitters/0/useArmyColor" },
+                { "op" : "remove", "path" : "/emitters/1/useArmyColor" },
+                { "op" : "remove", "path" : "/emitters/2/useArmyColor" },
+                { "op" : "remove", "path" : "/emitters/3/useArmyColor" },
+
+                { "op" : "replace", "path" : "/emitters/0/spec/red", "value" : 0.2 },
+                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 10 },
+                { "op" : "replace", "path" : "/emitters/0/spec/blue", "value" : 0.05 },
+
+                { "op" : "copy", "path" : "/emitters/1/spec/red", "from" : "/emitters/0/spec/red" },
+                { "op" : "copy", "path" : "/emitters/1/spec/green", "from" : "/emitters/0/spec/green" },
+                { "op" : "copy", "path" : "/emitters/1/spec/blue", "from" : "/emitters/0/spec/blue" },
+
+                { "op" : "copy", "path" : "/emitters/2/spec/red", "from" : "/emitters/0/spec/red" },
+                { "op" : "copy", "path" : "/emitters/2/spec/green", "from" : "/emitters/0/spec/green" },
+                { "op" : "copy", "path" : "/emitters/2/spec/blue", "from" : "/emitters/0/spec/blue" },
+
+                { "op" : "copy", "path" : "/emitters/3/spec/red", "from" : "/emitters/0/spec/red" },
+                { "op" : "copy", "path" : "/emitters/3/spec/green", "from" : "/emitters/0/spec/green" },
+                { "op" : "copy", "path" : "/emitters/3/spec/blue", "from" : "/emitters/0/spec/blue" },
+
+                { "op" : "scale", "path" : "/emitters/2/spec/red", "value" : 0.1 },
+                { "op" : "scale", "path" : "/emitters/2/spec/green", "value" : 0.1 },
+                { "op" : "scale", "path" : "/emitters/2/spec/blue", "value" : 0.1 }
+
+            ]
+        },
+        {
+            "target" : "/pa/effects/specs/fab_combat_spray.pfx",
+            "patch" : [
+                { "op" : "remove", "path" : "/emitters/0/useArmyColor" },
+                { "op" : "remove", "path" : "/emitters/1/useArmyColor" },
+                { "op" : "remove", "path" : "/emitters/2/useArmyColor" },
+
+                { "op" : "replace", "path" : "/emitters/0/spec/red", "value" : 0.4 },
+                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 4 },
+                { "op" : "replace", "path" : "/emitters/0/spec/blue", "value" : 0.05 },
+
+                { "op" : "copy", "path" : "/emitters/1/spec/red", "from" : "/emitters/0/spec/red" },
+                { "op" : "copy", "path" : "/emitters/1/spec/green", "from" : "/emitters/0/spec/green" },
+                { "op" : "copy", "path" : "/emitters/1/spec/blue", "from" : "/emitters/0/spec/blue" },
+
+                { "op" : "copy", "path" : "/emitters/2/spec/red", "from" : "/emitters/0/spec/red" },
+                { "op" : "copy", "path" : "/emitters/2/spec/green", "from" : "/emitters/0/spec/green" },
+                { "op" : "copy", "path" : "/emitters/2/spec/blue", "from" : "/emitters/0/spec/blue" }
+            ]
+        }
+    ]
+}
