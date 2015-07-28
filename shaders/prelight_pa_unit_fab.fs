@@ -55,8 +55,11 @@ void main()
         discard;
     }
 
+    // end of fab process, should be it's own var or encoded in to build_fraction > 1.0
+    float fab_fade = clamp((1.0 - build_fraction) * 7.0, 0.0, 1.0);
+
     float wirefill_timer = 1.0 - (build_fraction - 1.0 / metal_cost_mod_timer_offset) * 10.0;
-    float wire_anim = 0.6 + sin(-build_fraction * metal_cost_mod + dot(v_ModelPosition,v_ModelPosition) * 0.025) * 0.4;
+    float wire_anim = pow((sin(-build_fraction * metal_cost_mod + dot(v_ModelPosition,v_ModelPosition) * 0.025) + 1) / 2.0, 7.0) * fab_fade;
 
     if( wire_distfield > max(0.15 * wire_anim, wire_min_scale) && radial_fraction < wirefill_timer && build_mask > 0.0 )
     {
@@ -66,8 +69,7 @@ void main()
     float fab_mask = clamp((height_fraction - (build_fraction - 0.5) * 2.0 - 0.75 / model_height) * 1000.0, 0.0, 1.0);
     fab_mask = build_mask * (1.0 - fab_mask);
 
-    // end of fab process, should be it's own var or encoded in to build_fraction > 1.0
-    float fab_fade = clamp((1.0 - build_fraction) * 10.0, 0.0, 1.0);
+    
 
     float wire_prefab_scale = 0.15 / clamp(pow(radial_fraction - wirefill_timer - 0.01, 0.5), 0.01, 1.0);
     float wire_postfab_scale = 0.025;
@@ -80,8 +82,17 @@ void main()
     float wire_mask_raw = wire_distfield - wire_scale_clamped;
     float wire_mask = 1.0 - (1.0 - clamp( wire_mask_raw / wire_min_scale, 0.0, 1.0)) * wire_subpixel_fade;
 
+
+    float wire_fab_scale2 = mix(wire_postfab_scale, wire_prefab_scale, build_mask) * (1.0 - wire_anim);
+    float wire_scale2 = mix(wire_hide_scale, wire_fab_scale2, fab_fade);
+    float wire_subpixel_fade2 = clamp(wire_scale2 / (wire_min_scale * 0.25), 0.0, 1.0);
+    float wire_scale_clamped2 = max(wire_scale2, wire_min_scale * 0.25);
+
+    float wire_mask_raw2 = wire_distfield - wire_scale_clamped2;
+    float wire_mask2 = 1.0 - (1.0 - clamp( wire_mask_raw2 / wire_min_scale, 0.0, 1.0)) * wire_subpixel_fade2;
+
     vec3 build_color = TeamColor_Primary.xyz;
-    vec3 fab_color = vec3(1.5, 3.0, 0.0);
+    vec3 fab_color = vec3(0.2, 10.0, 0.05);
 
     vec4 mask = texture(MaskTexture, tc);
     vec3 viewNormal = normalize(v_Normal);
@@ -105,7 +116,8 @@ void main()
 
     vec3 ambientColor = calcAmbient(viewNormal, v_Forward);
     vec3 ambient = ambientColor * diffuse.rgb + diffuse.rgb * 2.0 * (1.0 - fab_fade) * emissive_mask * (1.0 - build_mask);
-    ambient = mix(build_color, ambient, wire_mask);
+    ambient = mix(ambient, build_color, (1.0 - wire_mask2) * build_mask);
+    ambient = mix(ambient, fab_color, (1.0 - wire_mask) * build_mask);
     ambient = mix(ambient, fab_color, fab_mask);
 
     out_FragData[0] = vec4(ambient, 1.0);
