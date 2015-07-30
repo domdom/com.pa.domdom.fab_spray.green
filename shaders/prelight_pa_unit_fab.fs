@@ -3,6 +3,7 @@
 // prelight_pa_unit_fab.fs
 
 #include "prelight_include.fs"
+#include "noise4D.glsl"
 
 uniform vec4 GBufferDepth_range;
 
@@ -59,7 +60,7 @@ void main()
     float fab_fade = clamp((1.0 - build_fraction) * 7.0, 0.0, 1.0);
 
     float wirefill_timer = 1.0 - (build_fraction - 1.0 / metal_cost_mod_timer_offset) * 10.0;
-    float wire_anim = pow((sin(-build_fraction * metal_cost_mod + dot(v_ModelPosition,v_ModelPosition) * 0.025) + 1) / 2.0, 7.0) * fab_fade;
+    float wire_anim = pow(snoise(vec4(v_ModelPosition.x / 12.0, v_ModelPosition.y / 12.0, v_ModelPosition.z / 12.0, build_fraction * metal_cost_mod / 10.0)), 1.0) * fab_fade;
 
     if( wire_distfield > max(0.15 * wire_anim, wire_min_scale) && radial_fraction < wirefill_timer && build_mask > 0.0 )
     {
@@ -117,7 +118,7 @@ void main()
     vec3 ambientColor = calcAmbient(viewNormal, v_Forward);
     vec3 ambient = ambientColor * diffuse.rgb + diffuse.rgb * 2.0 * (1.0 - fab_fade) * emissive_mask * (1.0 - build_mask);
     ambient = mix(ambient, build_color, (1.0 - wire_mask2) * build_mask);
-    ambient = mix(ambient, fab_color, (1.0 - wire_mask) * build_mask);
+    ambient = mix(ambient, fab_color, (1.0 - wire_mask) * (0.01 + 0.99 * build_mask));
     ambient = mix(ambient, fab_color, fab_mask);
 
     out_FragData[0] = vec4(ambient, 1.0);
