@@ -8,7 +8,6 @@
     "modinfo" : {
         "context" : "client",
         "identifier" : "com.pa.domdom.fab_spray_green",
-        "signature": " ",
         "display_name" : "Green Fab Spray",
         "description" : "Makes fabricator spray neon green instead of team colored and changes the fab shader effect.",
         "author" : "dom314",

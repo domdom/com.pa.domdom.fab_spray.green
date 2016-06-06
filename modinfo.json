@@ -2,17 +2,19 @@
     "context": "client",
     "identifier": "com.pa.domdom.fab_spray_green",
     "display_name": "Green Fab Spray",
-    "description": "Makes fabricator spray neon green instead of team colored.",
+    "description": "Makes fabricator spray neon green instead of team colored and changes the fab shader effect.",
     "author": "dom314",
     "forum": "https://forums.uberent.com/threads/rel-client-green-fab-spray.69339/",
     "icon": "http://i.imgur.com/ZB8M2dS.gif?1",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "category": [
-        "in-game",
+        "titans",
+        "classic",
+        "gameplay",
         "effects",
-        "shader"
+        "shaders"
     ],
-    "priority": 100,
-    "build": "89755",
-    "date": "2016/01/09"
+    "build": "94684",
+    "date": "2016/06/06",
+    "signature": " "
 }
