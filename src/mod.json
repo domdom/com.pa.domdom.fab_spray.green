@@ -13,7 +13,7 @@
         "author" : "dom314",
         "forum" : "https://forums.uberent.com/threads/rel-client-green-fab-spray.69339/",
         "icon" : "http://i.imgur.com/ZB8M2dS.gif?1",
-        "version" : "1.1.5",
+        "version" : "1.1.6",
         "category": [
             "titans",
             "classic",
@@ -32,7 +32,7 @@
                 { "op" : "remove", "path" : "/emitters/3/useArmyColor" },
 
                 { "op" : "replace", "path" : "/emitters/0/spec/red", "value" : 0.2 },
-                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 10 },
+                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 2 },
                 { "op" : "replace", "path" : "/emitters/0/spec/blue", "value" : 0.05 },
 
                 { "op" : "copy", "path" : "/emitters/1/spec/red", "from" : "/emitters/0/spec/red" },
@@ -61,7 +61,7 @@
                 { "op" : "remove", "path" : "/emitters/2/useArmyColor" },
 
                 { "op" : "replace", "path" : "/emitters/0/spec/red", "value" : 0.4 },
-                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 4 },
+                { "op" : "replace", "path" : "/emitters/0/spec/green", "value" : 1 },
                 { "op" : "replace", "path" : "/emitters/0/spec/blue", "value" : 0.05 },
 
                 { "op" : "copy", "path" : "/emitters/1/spec/red", "from" : "/emitters/0/spec/red" },
